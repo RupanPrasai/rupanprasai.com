@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../site.config';
+---
+
+<BaseLayout
+  title="Contact RUPAN PRASAI | Email and Social Links"
+  description="Get in touch with RUPAN PRASAI via email, LinkedIn, or GitHub for collaboration and engineering opportunities."
+  canonicalPath="/contact"
+>
+  <h1>Contact</h1>
+  <p>
+    I am open to conversations about engineering roles, consulting opportunities, and collaboration on high-impact software projects.
+  </p>
+  <ul>
+    <li>Email: <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
+    <li>LinkedIn: <a href={siteConfig.socialLinks.linkedin}>{siteConfig.socialLinks.linkedin}</a></li>
+    <li>GitHub: <a href={siteConfig.socialLinks.github}>{siteConfig.socialLinks.github}</a></li>
+  </ul>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import { siteConfig } from '../site.config';
+---
+
+<header>
+  <div class="container nav">
+    <a href="/" aria-label="Go to homepage"><strong>{siteConfig.fullName}</strong></a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="/about">About</a>
+      <a href="/projects">Projects</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+      <a href={siteConfig.socialLinks.linkedin} rel="noopener noreferrer">LinkedIn</a>
+      <a href={siteConfig.socialLinks.github} rel="noopener noreferrer">GitHub</a>
+    </nav>
+  </div>
+</header>

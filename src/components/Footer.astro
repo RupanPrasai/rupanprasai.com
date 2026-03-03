@@ -1,0 +1,15 @@
+---
+import { siteConfig } from '../site.config';
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="container">
+    <p>
+      © {year} {siteConfig.fullName}. Connect on
+      <a href={siteConfig.socialLinks.linkedin} rel="noopener noreferrer">LinkedIn</a>
+      and
+      <a href={siteConfig.socialLinks.github} rel="noopener noreferrer">GitHub</a>.
+    </p>
+  </div>
+</footer>
