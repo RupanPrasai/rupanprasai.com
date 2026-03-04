@@ -2,11 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '../site.config';
+import { getPhotoItems } from '../lib/photos';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 const latestPosts = posts.slice(0, 2);
+const photos = (await getPhotoItems()).slice(0, 4);
 
 const personJsonLd = {
   '@context': 'https://schema.org',
@@ -48,6 +50,30 @@ const personJsonLd = {
       ))}
     </div>
     <p><a href="/projects">See all project details on the Projects page.</a></p>
+  </section>
+
+
+
+  <section aria-labelledby="photos-preview">
+    <h2 id="photos-preview">Photos</h2>
+    <div class="photo-preview-grid">
+      {photos.map((photo, index) => (
+        <figure class="photo-preview-card">
+          <a href={photo.src} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size ${photo.caption}`}>
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              width={photo.width}
+              height={photo.height}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </a>
+          <figcaption>{photo.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p><a href="/photos">View all photos of Rupan Prasai.</a></p>
   </section>
 
   <section aria-labelledby="latest-writing">
