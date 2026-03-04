@@ -31,19 +31,22 @@ const toDescriptor = (filename: string) => {
 
 const getFilenameFromKey = (key: string) => key.split('/').pop() ?? key;
 
+const toPlainCaption = (text: string) => text.replace(/[—–]+/g, ' ').replace(/\s+/g, ' ').trim();
+
 export const getPhotoItems = async (): Promise<PhotoItem[]> => {
   return Object.entries(photoModules)
     .map(([key, src]) => ({ filename: getFilenameFromKey(key), src: src.replace('/public', '') }))
     .sort((a, b) => a.filename.localeCompare(b.filename))
     .map(({ filename, src }) => {
       const descriptor = toDescriptor(filename);
+      const caption = toPlainCaption(`Rupan Prasai ${descriptor}`);
 
       return {
         src,
         filename,
         descriptor,
         alt: `Rupan Prasai ${descriptor}`,
-        caption: `Rupan Prasai — ${descriptor}`,
+        caption,
         width: 1600,
         height: 1600
       };
