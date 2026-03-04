@@ -13,7 +13,7 @@ const personJsonLd = {
   '@type': 'Person',
   name: siteConfig.fullName,
   url: siteConfig.domain,
-  sameAs: [siteConfig.socialLinks.linkedin, siteConfig.socialLinks.github],
+  sameAs: [siteConfig.socialLinks.linkedin, siteConfig.socialLinks.medium, siteConfig.socialLinks.github],
   jobTitle: siteConfig.tagline,
   description: siteConfig.tagline
 };
@@ -25,7 +25,7 @@ const personJsonLd = {
   canonicalPath="/"
 >
   <h1>RUPAN PRASAI</h1>
-  <p class="meta">{siteConfig.tagline} · {siteConfig.location}</p>
+  <p class="meta hero-tagline">{siteConfig.tagline}</p>
 
   <p>
     I build software with a practical mindset: solve the real problem first, then design systems that remain easy to operate as usage grows.
