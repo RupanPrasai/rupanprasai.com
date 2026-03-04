@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../site.config';
+---
+
+<BaseLayout
+  title="Projects by RUPAN PRASAI | Selected Engineering Work"
+  description="Explore selected projects by RUPAN PRASAI, including architecture highlights, implementation goals, and technologies used."
+  canonicalPath="/projects"
+>
+  <h1>Projects</h1>
+  <p>
+    Below are selected projects that reflect my approach to building reliable, maintainable software. Replace placeholder links and names in
+    <code>src/site.config.ts</code> with your production project details.
+  </p>
+
+  <div class="card-grid">
+    {siteConfig.projects.map((project) => (
+      <article class="card">
+        <h2><a href={project.url}>{project.name}</a></h2>
+        <p>{project.description}</p>
+        <p class="meta">Tech stack: {project.techStack.join(', ')}</p>
+      </article>
+    ))}
+  </div>
+</BaseLayout>
