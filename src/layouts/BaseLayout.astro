@@ -7,12 +7,13 @@ import { siteConfig } from '../site.config';
 interface Props {
   title: string;
   description: string;
-  canonicalPath: string;
+  canonicalPath?: string;
   ogType?: 'website' | 'article';
 }
 
 const { title, description, canonicalPath, ogType = 'website' } = Astro.props;
-const canonical = new URL(canonicalPath, siteConfig.domain).toString();
+const pathname = canonicalPath ?? Astro.url.pathname;
+const canonical = new URL(pathname, siteConfig.domain).toString();
 ---
 
 <!doctype html>

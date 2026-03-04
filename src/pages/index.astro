@@ -11,43 +11,29 @@ const latestPosts = posts.slice(0, 2);
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: siteConfig.fullName,
+  name: 'Rupan Prasai',
   url: siteConfig.domain,
   sameAs: [siteConfig.socialLinks.linkedin, siteConfig.socialLinks.medium, siteConfig.socialLinks.github],
-  jobTitle: siteConfig.tagline,
-  description: siteConfig.tagline
+  jobTitle: 'Software Engineer',
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'University of Colorado Boulder'
+  }
 };
 ---
 
 <BaseLayout
-  title="RUPAN PRASAI | Engineer, Builder, and Problem Solver"
-  description="Official website of RUPAN PRASAI. Explore projects, technical writing, and practical engineering insights focused on reliable software systems."
+  title="Rupan Prasai | Software Engineer"
+  description="Rupan Prasai is a Software Engineer in the United States with an M.S. in Computer Science, building reliable products, backend systems, and developer workflows."
   canonicalPath="/"
 >
-  <h1>RUPAN PRASAI</h1>
-  <p class="meta hero-tagline">{siteConfig.tagline}</p>
+  <h1>Rupan Prasai</h1>
+  <p class="meta hero-tagline">Software Engineer based in the United States with an M.S. in Computer Science.</p>
 
   <p>
-    I build software with a practical mindset: solve the real problem first, then design systems that remain easy to operate as usage grows.
-    Over the years, I have learned that successful engineering is usually less about flashy frameworks and more about reliable foundations,
-    clear communication, and disciplined execution. That perspective shapes how I approach every project, whether I am prototyping a new
-    feature, shipping a production release, or tightening an existing workflow that has become fragile under change.
-  </p>
-  <p>
-    My work typically sits at the intersection of backend architecture, developer tooling, and product delivery. I enjoy translating ambiguous
-    requirements into a roadmap that teams can trust, then building toward measurable outcomes with steady iteration. In practice, that means
-    writing maintainable code, creating predictable deployment pipelines, and setting quality checks that catch problems early. I care deeply
-    about reducing operational surprises, because reliability is not only a technical metric—it is a user experience promise.
-  </p>
-  <p>
-    Beyond implementation, I pay close attention to how decisions age. Good architecture is not just about what works today; it is about what
-    your team can understand and improve six months from now. I prioritize readable systems, useful observability, and documentation that keeps
-    pace with reality. I also value thoughtful trade-offs: sometimes the right solution is sophisticated, and sometimes it is intentionally simple
-    so the team can move faster with confidence. Knowing the difference is a skill I continue to refine with each build.
-  </p>
-  <p>
-    This website is a living snapshot of how I think and what I ship. You will find selected projects, technical writing, and ways to connect.
-    If you are working on something that needs careful engineering and dependable execution, I am always open to meaningful conversations.
+    I’m Rupan Prasai, a software engineer focused on building reliable web products, backend systems, and practical developer tooling.
+    I care about clean architecture, predictable delivery, and software that stays maintainable as teams and usage grow.
+    Explore my <a href="/projects">Projects</a> and <a href="/blog">Blog</a> for examples of what I build and how I think.
   </p>
 
   <section aria-labelledby="featured-projects">

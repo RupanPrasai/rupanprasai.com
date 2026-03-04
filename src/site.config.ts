@@ -1,5 +1,5 @@
 export const siteConfig = {
-  fullName: 'RUPAN PRASAI',
+  fullName: 'Rupan Prasai',
   domain: 'https://rupanprasai.com',
   email: 'hello@rupanprasai.com',
   location: 'United States',
