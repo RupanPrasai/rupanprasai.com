@@ -9,9 +9,10 @@ interface Props {
   description: string;
   canonicalPath?: string;
   ogType?: 'website' | 'article';
+  ogImage?: string;
 }
 
-const { title, description, canonicalPath, ogType = 'website' } = Astro.props;
+const { title, description, canonicalPath, ogType = 'website', ogImage } = Astro.props;
 const pathname = canonicalPath ?? Astro.url.pathname;
 const canonical = new URL(pathname, siteConfig.domain).toString();
 ---
@@ -29,10 +30,12 @@ const canonical = new URL(pathname, siteConfig.domain).toString();
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={siteConfig.fullName} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:url" content={canonical} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
   </head>
   <body>
     <Header />

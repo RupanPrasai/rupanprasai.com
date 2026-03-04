@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../site.config';
+import { getPhotoItems, getRepresentativePhoto } from '../lib/photos';
+
+const photos = await getPhotoItems();
+const representativePhoto = getRepresentativePhoto(photos);
+const representativeImageUrl = representativePhoto
+  ? new URL(representativePhoto.src, siteConfig.domain).toString()
+  : undefined;
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: siteConfig.fullName,
+  url: `${siteConfig.domain}/`,
+  image: representativeImageUrl,
+  sameAs: [siteConfig.socialLinks.linkedin, siteConfig.socialLinks.github, siteConfig.socialLinks.medium],
+  jobTitle: 'Software Engineer'
+};
+---
+
+<BaseLayout
+  title="Photos of Rupan Prasai"
+  description="Professional photos of Rupan Prasai, software engineer."
+  canonicalPath="/photos"
+  ogImage={representativeImageUrl}
+>
+  <nav aria-label="Breadcrumb" class="photo-breadcrumb">
+    <a href="/">Home</a>
+    <span aria-hidden="true">/</span>
+    <span>Photos</span>
+  </nav>
+
+  <h1>Photos of Rupan Prasai</h1>
+  <p>A selection of professional photos of Rupan Prasai.</p>
+
+  <section aria-label="Photo gallery" class="photo-gallery">
+    {photos.map((photo, index) => (
+      <figure class="photo-card">
+        <a href={photo.src} target="_blank" rel="noopener noreferrer" aria-label={`Open full-size ${photo.caption}`}>
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            width={photo.width}
+            height={photo.height}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        </a>
+        <figcaption>{photo.caption}</figcaption>
+      </figure>
+    ))}
+  </section>
+
+  <p><a href="/">← Back to home</a></p>
+
+  <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+</BaseLayout>
