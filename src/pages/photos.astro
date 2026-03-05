@@ -15,7 +15,14 @@ const personJsonLd = {
   name: siteConfig.fullName,
   url: `${siteConfig.domain}/`,
   image: representativeImageUrl,
-  sameAs: [siteConfig.socialLinks.linkedin, siteConfig.socialLinks.github, siteConfig.socialLinks.medium],
+  sameAs: [
+    'https://rupanprasai.com',
+    'https://rupanprasai.com/photos',
+    siteConfig.socialLinks.github,
+    siteConfig.socialLinks.linkedin,
+    siteConfig.socialLinks.medium,
+    siteConfig.socialLinks.youtube
+  ],
   jobTitle: 'Software Engineer'
 };
 ---

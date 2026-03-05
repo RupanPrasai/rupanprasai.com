@@ -115,6 +115,33 @@ ol {
   margin-bottom: 1.5rem;
 }
 
+
+.hero {
+  max-width: 100%;
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.hero-image {
+  margin: 0;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 20rem;
+  height: auto;
+  border-radius: 0.95rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.hero-image figcaption {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.93rem;
+}
+
 section {
   margin-top: 2.9rem;
 }
@@ -237,6 +264,14 @@ footer {
 }
 
 @media (min-width: 52rem) {
+  .hero {
+    grid-template-columns: minmax(0, 2fr) minmax(15rem, 1fr);
+  }
+
+  .hero-image {
+    justify-self: end;
+  }
+
   .photo-preview-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

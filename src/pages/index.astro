@@ -1,21 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
 import { siteConfig } from '../site.config';
 import { getPhotoItems } from '../lib/photos';
+import { featuredRepos, socialLinks, socialPosts, writingLinks } from '../data/external';
 
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
-);
-const latestPosts = posts.slice(0, 2);
 const photos = (await getPhotoItems()).slice(0, 4);
 
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Rupan Prasai',
-  url: siteConfig.domain,
-  sameAs: [siteConfig.socialLinks.linkedin, siteConfig.socialLinks.medium, siteConfig.socialLinks.github],
+  url: 'https://rupanprasai.com',
+  image: siteConfig.heroImage,
+  sameAs: [
+    'https://rupanprasai.com',
+    'https://rupanprasai.com/photos',
+    'https://github.com/rupanprasai',
+    'https://www.linkedin.com/in/rupanprasai/',
+    'https://medium.com/@rupanprasai',
+    'https://youtube.com/@rupanprasai'
+  ],
   jobTitle: 'Software Engineer',
   alumniOf: {
     '@type': 'CollegeOrUniversity',
@@ -28,31 +32,88 @@ const personJsonLd = {
   title="Rupan Prasai | Software Engineer"
   description="Rupan Prasai is a Software Engineer in the United States with an M.S. in Computer Science, building reliable products, backend systems, and developer workflows."
   canonicalPath="/"
+  ogImage={siteConfig.heroImage}
 >
-  <h1>Rupan Prasai</h1>
-  <p class="meta hero-tagline">Software Engineer based in the United States with an M.S. in Computer Science.</p>
-
-  <p>
-    I’m Rupan Prasai, a software engineer focused on building reliable web products, backend systems, and practical developer tooling.
-    I care about clean architecture, predictable delivery, and software that stays maintainable as teams and usage grow.
-    Explore my <a href="/projects">Projects</a> and <a href="/blog">Blog</a> for examples of what I build and how I think.
-  </p>
+  <section class="hero" aria-labelledby="home-title">
+    <div>
+      <h1 id="home-title">Rupan Prasai</h1>
+      <p class="meta hero-tagline">Software Engineer based in the United States with an M.S. in Computer Science.</p>
+      <p>
+        I build reliable web products, backend systems, and practical developer tooling. Explore my projects, writing,
+        and photos below.
+      </p>
+    </div>
+    <figure class="hero-image">
+      <img
+        src={siteConfig.heroImage}
+        alt="Rupan Prasai formal portrait"
+        width="900"
+        height="900"
+        loading="eager"
+        decoding="async"
+      />
+      <figcaption>Rupan Prasai portrait.</figcaption>
+    </figure>
+  </section>
 
   <section aria-labelledby="featured-projects">
     <h2 id="featured-projects">Featured Projects</h2>
     <div class="card-grid">
-      {siteConfig.projects.map((project) => (
+      {featuredRepos.map((project) => (
         <article class="card">
-          <h3><a href={project.url}>{project.name}</a></h3>
+          <h3>
+            <a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a>
+          </h3>
           <p>{project.description}</p>
           <p class="meta">{project.techStack.join(' · ')}</p>
         </article>
       ))}
     </div>
-    <p><a href="/projects">See all project details on the Projects page.</a></p>
   </section>
 
+  <section aria-labelledby="writing-links">
+    <h2 id="writing-links">Writing</h2>
+    <div class="card-grid">
+      {writingLinks.map((writing) => (
+        <article class="card">
+          <h3>
+            <a href={writing.href} target="_blank" rel="noopener noreferrer me">{writing.title}</a>
+          </h3>
+          <p class="meta">{writing.source}</p>
+          <p>{writing.summary}</p>
+        </article>
+      ))}
+    </div>
+  </section>
 
+  <section aria-labelledby="find-me-online">
+    <h2 id="find-me-online">Find me online</h2>
+    <div class="card-grid">
+      {socialLinks.map((link) => (
+        <article class="card">
+          <h3>
+            <a href={link.href} target="_blank" rel={link.relMe ? 'noopener noreferrer me' : 'noopener noreferrer'}>{link.label}</a>
+          </h3>
+          <p class="meta">{link.href}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section aria-labelledby="updates-links">
+    <h2 id="updates-links">Updates</h2>
+    <div class="card-grid">
+      {socialPosts.map((post) => (
+        <article class="card">
+          <h3>
+            <a href={post.href} target="_blank" rel="noopener noreferrer">{post.title}</a>
+          </h3>
+          <p class="meta">{post.platform}</p>
+          <p>{post.summary}</p>
+        </article>
+      ))}
+    </div>
+  </section>
 
   <section aria-labelledby="photos-preview">
     <h2 id="photos-preview">Photos</h2>
@@ -74,22 +135,6 @@ const personJsonLd = {
       ))}
     </div>
     <p><a href="/photos">View all photos of Rupan Prasai.</a></p>
-  </section>
-
-  <section aria-labelledby="latest-writing">
-    <h2 id="latest-writing">Latest Writing</h2>
-    <div class="card-grid">
-      {latestPosts.map((post) => (
-        <article class="card">
-          <h3><a href={`/blog/${post.slug}`}>{post.data.title}</a></h3>
-          <p class="meta">
-            <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-          </p>
-          <p>{post.data.description}</p>
-        </article>
-      ))}
-    </div>
-    <p><a href="/blog">Browse all posts.</a></p>
   </section>
 
   <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
